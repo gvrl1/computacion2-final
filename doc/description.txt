@@ -1,0 +1,13 @@
+Descripción verbal de la aplicación
+    Quiero desarrollar una aplicación cliente-servidor de chatbot distribuido que permita a múltiples clientes conectarse al servidor de manera concurrente para enviar mensajes al bot y recibir respuestas en tiempo real.
+
+Cliente:
+    - Envía mensajes al servidor a través de sockets TCP/IP.
+    - Recibe las respuestas generadas por el servidor, que pueden ser simples (procesadas directamente) o complejas (procesadas en paralelo mediante Celery y Redis).
+    - Interactúa a través de una terminal de línea de comandos.
+Servidor:
+    - Escucha conexiones de múltiples clientes simultáneamente usando sockets y asincronismo (asyncio).
+    - Procesa mensajes simples directamente en el servidor (por ejemplo, saludos o respuestas predefinidas).
+    - Envía tareas complejas a una cola distribuida manejada por Celery (por ejemplo, análisis de texto o generación de respuestas personalizadas).
+    - Se comunica de manera asincrónica con los clientes y delega tareas al backend (Redis) para procesamiento paralelo.
+    - Se usa concurrencia en el manejo de múltiples clientes con asyncio para evitar bloqueos. Se usa paralelismo en la ejecución de tareas complejas mediante Celery, distribuyendo las tareas entre múltiples workers.

@@ -1,0 +1,15 @@
+Lista de funcionalidades
+    Cliente:
+        - Envía mensajes al servidor utilizando sockets TCP/IP.
+        - Permite configurar el servidor destino mediante argumentos por línea de comandos.
+        - Recibe y muestra las respuestas procesadas por el servidor.
+    Servidor:
+        - Escucha conexiones de múltiples clientes simultáneamente.
+        - Procesa mensajes simples directamente.
+        - Envía mensajes complejos a la cola de tareas para procesamiento.
+        - Administra la comunicación cliente-servidor de forma asincrónica.
+    Celery (Worker):
+        - Procesa tareas pesadas en paralelo.
+        - Devuelve los resultados al servidor para su envío al cliente.
+    Redis (Cola de tareas):
+        - Actúa como intermediario para almacenar y distribuir las tareas enviadas por el servidor.
