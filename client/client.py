@@ -2,22 +2,22 @@ import socket
 import argparse
 
 def main():
-    parser = argparse.ArgumentParser(description="Chatbot Client")
-    parser.add_argument("--host", type=str, default="127.0.0.1", help="Server IP address")
-    parser.add_argument("--port", type=int, default=5555, help="Server port")
+    parser = argparse.ArgumentParser(description="Cliente para Chatbot JDM")
+    parser.add_argument("--host", type=str, default="127.0.0.1", help="Dirección IP del servidor")
+    parser.add_argument("--port", type=int, default=5555, help="Puerto del servidor")
     args = parser.parse_args()
 
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect((args.host, args.port))
-    print("Connected to the server. Type 'exit' to quit.")
+    print(client.recv(1024).decode())
 
     while True:
-        message = input("You: ")
-        if message.lower() == "exit":
-            break
-        client.send(message.encode())
+        option = input("Selecciona una opción: ")
+        client.send(option.encode())
         response = client.recv(1024).decode()
-        print(f"Server: {response}")
+        print(f"Respuesta del servidor: {response}")
+        if option == "5":
+            break
 
     client.close()
 
