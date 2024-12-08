@@ -16,7 +16,7 @@ def main():
         client.send(option.encode())
         response = client.recv(1024).decode()
         print(f"Respuesta del servidor: {response}")
-        if option == "5":
+        if option == "0":
             break
 
     client.close()
