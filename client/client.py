@@ -3,7 +3,7 @@ import argparse
 
 def main():
     parser = argparse.ArgumentParser(description="Cliente para Chatbot JDM")
-    parser.add_argument("--host", type=str, default="127.0.0.1", help="Dirección IP del servidor")
+    parser.add_argument("--host", type=str, default="0.0.0.0", help="Dirección IP del servidor")
     parser.add_argument("--port", type=int, default=5555, help="Puerto del servidor")
     args = parser.parse_args()
 

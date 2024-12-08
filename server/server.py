@@ -22,16 +22,18 @@ async def handle_option_3():
 
 # Diccionario que mapea opciones a funciones
 options = {
-    "0": "Gracias por usar el Chatbot de JDM. ¡Hasta luego!",
-    "1": "JDM se refiere a autos fabricados exclusivamente para el mercado japonés.",
-    "2": "Modelos icónicos: Nissan Skyline GT-R, Toyota Supra, Mazda RX-7.",
+    "0": lambda: "Gracias por usar el Chatbot de JDM. ¡Hasta luego!",
+    "1": lambda: "JDM se refiere a autos fabricados exclusivamente para el mercado japonés.",
+    "2": lambda: "Modelos icónicos: Nissan Skyline GT-R, Toyota Supra, Mazda RX-7.",
     "3": handle_option_3,
-    "4": "Eventos populares: Tokyo Auto Salon, eventos de drifting en Japón.",
+    "4": lambda: "Eventos populares: Tokyo Auto Salon, eventos de drifting en Japón.",
 }
 
 async def handle_client(reader, writer):
     addr = writer.get_extra_info('peername')
-    print(f"Conexión nueva desde {addr}")
+    print(f"Conexión nueva desde {addr[0]}:{addr[1]}") #Muestra la IP y puerto del cliente
+
+    # Envia el menu al cliente
     writer.write(menu.encode())
     await writer.drain()
 
@@ -61,7 +63,7 @@ async def handle_client(reader, writer):
     writer.close()
 
 async def main():
-    server = await asyncio.start_server(handle_client, '127.0.0.1', 5555)
+    server = await asyncio.start_server(handle_client, '0.0.0.0', 5555)
     print("Servidor escuchando en el puerto 5555...")
     async with server:
         await server.serve_forever()
